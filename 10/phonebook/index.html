@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+        <script src="app/services/taskService.js"></script>
+        <script src="app/controllers/myCtrl.js"></script>
+        <script src="app/app.js"></script>
+</head>
+<body>
+    <div ng-controller="mainCtrl as main">
+       Find:<input type="text" width="48" name="" ng-model="main.test"/>
+       <div ng-show="main.show">
+          name: <input type="text" ng-model="main.newname">
+          surname: <input type="text" ng-model="main.newsurname">
+          number: <input type="text" ng-model="main.newnumber">
+          <button class="btn btn-primary" ng-click="main.saveNew(main.newname, main.newsurname, main.newnumber)">Save</button>
+           
+       </div>
+       <table  class="table table-hover">
+           <thead>
+               <tr>
+           <th ng-click="main.orderByMe('name')">Name</th>
+           <th ng-click="main.orderByMe('surname')">Surname</th>
+           <th ng-click="main.orderByMe('number')">Number</th>
+           <th><button type="button" class="btn btn-primary" ng-click="main.addNew()">Add</button></th>
+           </tr>
+           </thead>
+           <tbody>
+           <tr ng-repeat="key in main.list|orderBy:main.myOrderBy| filter:main.test">
+               <td>{{key.name}}</td>
+               <td>{{key.surname}}</td>
+               <td>{{key.number}}</td>
+               <td><button type="button" class="btn btn-success" ng-click="main.change($index)">Change</button>
+                   <button type="text" class="btn btn-danger" ng-click="main.del($index)">Delete</button></td>
+           </tr>
+           </tbody>
+       </table>
+    </div>
+    
+</body>
+</html>
